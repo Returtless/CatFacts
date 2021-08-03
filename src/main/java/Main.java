@@ -27,7 +27,8 @@ public class Main {
         try {
             final CloseableHttpResponse response = httpClient.execute(request);
             final String responseData = new String(response.getEntity().getContent().readAllBytes(), StandardCharsets.UTF_8);
-            final List<Fact> facts = mapper.readValue(responseData, new TypeReference<List<Fact>>() {});
+            final List<Fact> facts = mapper.readValue(responseData, new TypeReference<>() {
+            });
             facts.stream().filter(value -> value.getUpvotes() != null && value.getUpvotes() > 0).forEach(System.out::println);
             httpClient.close();
         } catch (IOException e) {
